@@ -108,10 +108,10 @@ const MyBlogs = () => {
             <div className="p-4">
               <h2 className="text-xl font-bold pb-2">Update Blog</h2>
               <form>
-                <input type="text" value={selectedBlog.title} onChange={(e) => setSelectedBlog({ ...selectedBlog, title: e.target.value })} className="block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" />
-                <textarea value={selectedBlog.content} onChange={(e) => setSelectedBlog({ ...selectedBlog, content: e.target.value })} className="block w-full mt-2 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"></textarea>
+                <input type="text" value={selectedBlog.title} onChange={(e) => setSelectedBlog({ ...selectedBlog, title: e.target.value })} className="block my-3 w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" />
+                <textarea value={selectedBlog.content} onChange={(e) => setSelectedBlog({ ...selectedBlog, content: e.target.value })} className="block my-3 w-full mt-2 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"></textarea>
                 <input type="file" accept="image/*" onChange={(e) => setSelectedBlog({ ...selectedBlog, image: e.target.files[0] })} className="mt-2" />
-                <p onClick={update} className="pt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">Submit</p>
+                <p onClick={update} className="pt-4 my-3 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">Submit</p>
               </form>
             </div>
           </div>

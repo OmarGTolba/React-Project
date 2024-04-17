@@ -174,7 +174,7 @@ const Blogs = () => {
 
   return (
     <div
-      className={`p-4 max-w-100 h-100 mx-auto pb-32 ${darkMode ? "bg-gray-900 text-white" :
+      className={`p-4 max-w-100 h-100  mx-auto pb-32 ${darkMode ? "bg-gray-900 text-white" :
           "bg-gray-100 text-gray-900"
         }`}
     >
@@ -183,11 +183,11 @@ const Blogs = () => {
         blogs.map((blog, index) => (
           <div
             key={blog._id}
-            className="max-w-lg mx-auto bg-white shadow-md rounded-lg overflow-hidden mb-8"
+            className=" max-w-lg mx-auto bg-white shadow-md rounded-lg overflow-hidden mt-4 "
           >
             <img
               src={`../public/${blog.image}`}
-              className="w-full h-64 object-cover object-center"
+              className=" h-64 object-cover object-center w-full"
             />
             <div className="p-4">
               <h2 className="text-xl  text-gray-900 font-bold mb-2">
