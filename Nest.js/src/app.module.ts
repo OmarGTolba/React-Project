@@ -12,11 +12,12 @@ import { SocketGateway } from './socket/socket.gateway';
 import { MessagesModule } from './messages/messages.module';
 import { MessagesService } from './messages/messages.service';
 import { messageSchema } from './messages/message.schema';
-
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
-    MongooseModule.forRoot(`mongodb://localhost:27017/ui`),
+    ConfigModule.forRoot(),
+    MongooseModule.forRoot(`mongodb+srv://admin:jjPoycnkmTbLzT7R@cluster0.eukhj9i.mongodb.net/blogs`),
     MongooseModule.forFeature([{ name: "messages", schema: messageSchema }]),
     UsersModule,
     JwtModule.register({ secret: 'secret', signOptions: { expiresIn: '1d' } }),

@@ -55,7 +55,7 @@ export default function NavBar() {
 
           </div>
 
-          <div className="flex justify-center space-x-6 items-center">
+          <div className="flex justify-center space-x-28 items-center">
             {isLoggedIn ? (
               <>
 
