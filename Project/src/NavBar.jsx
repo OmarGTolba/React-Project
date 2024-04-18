@@ -51,7 +51,7 @@ export default function NavBar() {
                 onClick={toggleDarkMode}
               />
             )}
-            <h3 className='mb-1'> &lt;- Click the icon  </h3>
+            <h3 className='mb-1'> &lt;- Darkmode  </h3>
 
           </div>
 

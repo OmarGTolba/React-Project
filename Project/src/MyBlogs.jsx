@@ -3,7 +3,12 @@ import axios from 'axios';
 import { useAuth } from './AuthContex';
 import { ToastContainer,toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { css } from '@emotion/react';
+import { ClipLoader } from 'react-spinners';
+
+
 const MyBlogs = () => {
+  const [loading, setLoading] = useState(true);
   const toastSuccess = (word) => toast.success(`${word} succesfully`);
   const toastError = (word) => toast.success(`${word} failed`);
   const userId = localStorage.getItem('userId');
@@ -25,6 +30,7 @@ const MyBlogs = () => {
     try {
       const response = await axios.get('http://localhost:3000/blogs');
       setBlogs(response.data);
+      setLoading(false)
     } catch (error) {
       console.error('Error fetching blogs:', error);
     }
@@ -76,6 +82,18 @@ const MyBlogs = () => {
 
   return (
     <div className={` max-w-100max-w-md p-8 mx-auto max h-100 ${darkMode ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-900'}`}>
+     {loading ? (
+      <div className="sweet-loading absolute inset-0 flex justify-center items-center bg-black bg-opacity-75 z-50 absolute   left-0 right-0 flex z justify-center align-middle">
+        <ClipLoader
+
+          size={150}
+          color={"#123abc"}
+          loading={loading}
+        />
+      </div>
+    ) : (
+    <div></div>
+    )}
       <h1 className="text-3xl font-bold pb-4 ps-1">  My Blogs</h1>
       {Array.isArray(blogs) && blogs.map((blog, index) => (
         userId === blog?.user?._id && (
