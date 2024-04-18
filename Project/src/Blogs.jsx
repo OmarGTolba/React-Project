@@ -6,7 +6,11 @@ import { useLocation } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer,toast } from 'react-toastify';
 
+import { css } from '@emotion/react';
+import { ClipLoader } from 'react-spinners';
+
 const Blogs = () => {
+  const [loading, setLoading] = useState(true);
 
   const [heartColors, setHeartColors] = useState([]);
   const [blogs, setBlogs] = useState([]);
@@ -20,6 +24,13 @@ const Blogs = () => {
   const { darkMode, setDarkMode } = useAuth();
   const [searchInput, setSearchInput] = useState('');
   const location = useLocation(); // Access the location object
+
+
+  const override = css`
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+`;
 
   // .............................................................................................................................................
   useEffect(() => {
@@ -41,6 +52,7 @@ const Blogs = () => {
   }, [location.search]);
   // .............................................................................................................................................
   const fetchBlogs = async () => {
+    setLoading(true)
     const searchParams = new URLSearchParams(location.search);
     const query = searchParams.get('query');
     if (query) {
@@ -49,6 +61,8 @@ const Blogs = () => {
           const response = await axios.get(`http://localhost:3000/users/${userId}`);
           setUser(response.data);
           setBlogs(response.data.favorite);
+          setLoading(false)
+          console.log(loading);
         } catch (error) {
           console.error("Error fetching user data:", error);
         }
@@ -66,6 +80,7 @@ const Blogs = () => {
       try {
         const response = await axios.get("http://localhost:3000/blogs");
         setBlogs(response.data);
+        setLoading(false)
       } catch (error) {
         console.error("Error fetching blogs:", error);
       }
@@ -178,6 +193,19 @@ const Blogs = () => {
           "bg-gray-100 text-gray-900"
         }`}
     >
+
+{loading ? (
+      <div className="sweet-loading absolute inset-0 flex justify-center items-center bg-black bg-opacity-75 z-50 absolute   left-0 right-0 flex z justify-center align-middle">
+        <ClipLoader
+          css={override}
+          size={150}
+          color={"#123abc"}
+          loading={loading}
+        />
+      </div>
+    ) : (
+    <div></div>
+    )}
       <h1 className="text-3xl font-bold mb-4">Blogs</h1>
       {Array.isArray(blogs) &&
         blogs.map((blog, index) => (
@@ -231,7 +259,7 @@ const Blogs = () => {
                   <textarea
                     value={commentContent}
                     onChange={(e) => setCommentContent(e.target.value)}
-                    className="block w-full h-24 px-2 py-1 mb-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-400"
+                    className="block text-gray-700 w-full h-24 px-2 py-1 mb-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-400"
                     placeholder="Type your comment here..."
                   ></textarea>
                   <div className="flex justify-end">
@@ -251,7 +279,7 @@ const Blogs = () => {
                   {comments.map((comment) => (
                     <div
                       key={comment._id}
-                      className="bg-gray-100 p-2 rounded-md mb-2"
+                      className=" text-gray-700 p-2 rounded-md mb-2"
                     >
                       <p>{comment.comment}</p>
                     </div>
